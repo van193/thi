@@ -30,14 +30,14 @@
             if (month === 2) {
                 // Kiểm tra năm nhuận
                 if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
-                    days = 29; // Tháng 2 năm nhuận
+                    days = 29; // Năm nhuận
                 } else {
-                    days = 28; // Tháng 2 không phải năm nhuận
+                    days = 28; // Không phải năm nhuận
                 }
             } else if ([4, 6, 9, 11].includes(month)) {
-                days = 30; // Tháng có 30 ngày
+                days = 30;
             } else {
-                days = 31; // Tháng có 31 ngày
+                days = 31;
             }
 
             document.getElementById("result").innerText = `Tháng ${month}/${year} có ${days} ngày.`;
