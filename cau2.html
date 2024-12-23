@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        function isPerfectNumber(number) {
+        function perfectNumber(number) {
             if (number <= 0) {
                 return false; // Chỉ chấp nhận số nguyên dương
             }
@@ -31,7 +31,7 @@
                 return;
             }
 
-            const result = isPerfectNumber(number);
+            const result = perfectNumber(number);
 
             document.getElementById('result').textContent =
                 `${number}: ${result}`;
