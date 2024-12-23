@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 1</title>
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+<body>
+
+    <input type="number" id="numberInput" placeholder="Nhập số nguyên">
+    <button onclick="addNumber()">Thêm số</button>
+    <p id="error" class="error"></p>
+
+    <h3>Mảng hiện tại:</h3>
+    <p id="arrayDisplay">[]</p>
+
+    <button onclick="calculateAverage()">Tính trung bình cộng</button>
+    <h3>Kết quả:</h3>
+    <p id="result"></p>
+
+    <script>
+       let numbers = [];
+
+    function addNumber() {
+    const input = document.getElementById('numberInput');
+    const errorDisplay = document.getElementById('error');
+    const arrayDisplay = document.getElementById('arrayDisplay');
+    const resultDisplay = document.getElementById('result');
+    
+    const number = parseInt(input.value);
+
+    if (isNaN(number)) {
+        errorDisplay.textContent = "Vui lòng nhập một số hợp lệ.";
+        return;
+    }
+
+    if (numbers.length >= 50) {
+        errorDisplay.textContent = "Mảng không được chứa quá 50 phần tử.";
+        return;
+    }
+
+    errorDisplay.textContent = "";
+    numbers.push(number);
+    arrayDisplay.textContent = JSON.stringify(numbers);
+    input.value = "";
+    resultDisplay.textContent = ""; // Xóa kết quả cũ
+}
+
+function calculateAverage() {
+    const resultDisplay = document.getElementById('result');
+    const divisibleBy3 = numbers.filter(num => num % 3 === 0);
+
+    if (divisibleBy3.length === 0) {
+        resultDisplay.textContent = "Không có số nào trong mảng chia hết cho 3.";
+        return;
+    }
+
+    const sum = divisibleBy3.reduce((total, num) => total + num, 0);
+    const average = sum / divisibleBy3.length;
+
+    resultDisplay.textContent = `Trung bình cộng các số chia hết cho 3: ${average.toFixed(2)}`;
+} 
+    </script>
+</body>
+</html>
