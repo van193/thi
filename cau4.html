@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 4</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        let congNhanList = [
+            { STT: 1, hoTen: "Nguyễn Văn A", ngaySinh: "1990-05-01", diaChi: "Hà Nội", luong: 10000000, chucVu: "Công nhân" },
+            { STT: 2, hoTen: "Lê Thị B", ngaySinh: "1985-09-15", diaChi: "Hải Phòng", luong: 12000000, chucVu: "Tổ trưởng" },
+            { STT: 3, hoTen: "Trần Văn C", ngaySinh: "1992-03-22", diaChi: "Đà Nẵng", luong: 9500000, chucVu: "Công nhân" },
+            { STT: 4, hoTen: "Phạm Thị D", ngaySinh: "1988-12-12", diaChi: "TP.HCM", luong: 11000000, chucVu: "Công nhân" },
+        ];
+
+        function sapXepTheoSTT() {
+            congNhanList.sort((a, b) => a.STT - b.STT);
+        }
+
+        function hienThiDanhSach() {
+            sapXepTheoSTT();
+
+            const tbody = document.getElementById("table-body");
+            tbody.innerHTML = "";
+
+            congNhanList.forEach(congNhan => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${congNhan.STT}</td>
+                    <td>${congNhan.hoTen}</td>
+                    <td>${congNhan.ngaySinh}</td>
+                    <td>${congNhan.diaChi}</td>
+                    <td>${congNhan.luong.toLocaleString()} VND</td>
+                    <td>${congNhan.chucVu}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Hàm gọi hiển thị khi trang tải xong
+        window.onload = hienThiDanhSach;
+    </script>
+</head>
+<body>
+    <h1>Danh sách công nhân trong phân xưởng</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và Tên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Lương</th>
+                <th>Chức vụ</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</body>
+</html>
