@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 2</title>
+</head>
+<body>
+    <script>
+        function isPerfectNumber(number) {
+            if (number <= 0) {
+                return false; // Chỉ chấp nhận số nguyên dương
+            }
+
+            let sum = 0;
+            for (let i = 1; i <= number / 2; i++) {
+                if (number % i === 0) {
+                    sum += i;
+                }
+            }
+
+            return sum === number;
+        }
+
+        function checkPerfectNumber() {
+            const input = document.getElementById('numberInput').value;
+            const number = parseInt(input);
+
+            if (isNaN(number) || number <= 0) {
+                alert('Vui lòng nhập số hợp lệ.');
+                return;
+            }
+
+            const result = isPerfectNumber(number);
+
+            document.getElementById('result').textContent =
+                `Số ${number} là số hoàn hảo: ${result}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Kiểm tra Số Hoàn Hảo</h1>
+    <label for="numberInput">Nhập một số nguyên dương:</label>
+    <input type="number" id="numberInput" min="1" required>
+    <button onclick="checkPerfectNumber()">Kiểm tra</button>
+
+    <p id="result"></p>
+    </script>
+</body>
+</html>
