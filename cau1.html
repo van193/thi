@@ -4,74 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Câu 1</title>
+
 </head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input {
-            margin-bottom: 10px;
-        }
-        .error {
-            color: red;
-        }
-    </style>
 <body>
-
-    <input type="number" id="numberInput" placeholder="Nhập số nguyên">
-    <button onclick="addNumber()">Thêm số</button>
-    <p id="error" class="error"></p>
-
-    <h3>Mảng hiện tại:</h3>
-    <p id="arrayDisplay">[]</p>
-
-    <button onclick="calculateAverage()">Tính trung bình cộng</button>
-    <h3>Kết quả:</h3>
+    <h1>Tính Trung Bình Cộng Các Số Chia Hết Cho 3</h1>
+    <label for="arrayInput">Nhập mảng số nguyên (các số cách nhau bằng dấu phẩy):</label><br>
+    <input type="text" id="arrayInput" placeholder=""><br><br>
+    <button onclick="calculateAverage()">Tính Trung Bình Cộng</button><br><br>
     <p id="result"></p>
-
     <script>
-       let numbers = [];
+        function calculateAverage() {
+            // Nhập mảng số nguyên từ người dùng
+            const inputArray = document.getElementById("arrayInput").value;
+            const numbers = inputArray.split(',').map(num => parseInt(num.trim()));
 
-    function addNumber() {
-    const input = document.getElementById('numberInput');
-    const errorDisplay = document.getElementById('error');
-    const arrayDisplay = document.getElementById('arrayDisplay');
-    const resultDisplay = document.getElementById('result');
-    
-    const number = parseInt(input.value);
+            // Lọc các số chia hết cho 3
+            const divisibleByThree = numbers.filter(num => num % 3 === 0);
 
-    if (isNaN(number)) {
-        errorDisplay.textContent = "Vui lòng nhập một số hợp lệ.";
-        return;
-    }
+            // Tính tổng và trung bình cộng
+            const total = divisibleByThree.reduce((sum, num) => sum + num, 0);
+            const average = divisibleByThree.length > 0 ? (total / divisibleByThree.length) : 0;
 
-    if (numbers.length >= 50) {
-        errorDisplay.textContent = "Mảng không được chứa quá 50 phần tử.";
-        return;
-    }
-
-    errorDisplay.textContent = "";
-    numbers.push(number);
-    arrayDisplay.textContent = JSON.stringify(numbers);
-    input.value = "";
-    resultDisplay.textContent = ""; // Xóa kết quả cũ
-}
-
-function calculateAverage() {
-    const resultDisplay = document.getElementById('result');
-    const divisibleBy3 = numbers.filter(num => num % 3 === 0);
-
-    if (divisibleBy3.length === 0) {
-        resultDisplay.textContent = "Không có số nào trong mảng chia hết cho 3.";
-        return;
-    }
-
-    const sum = divisibleBy3.reduce((total, num) => total + num, 0);
-    const average = sum / divisibleBy3.length;
-
-    resultDisplay.textContent = `Trung bình cộng các số chia hết cho 3: ${average.toFixed(2)}`;
-} 
+            // Hiển thị kết quả
+            const result = divisibleByThree.length > 0
+                ? `Trung bình cộng các số chia hết cho 3 là: ${average.toFixed(2)}`
+                : "Không có số nào chia hết cho 3.";
+            
+            document.getElementById("result").innerText = result;
+        }
     </script>
+</body>
 </body>
 </html>
