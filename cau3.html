@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 3</title>
+</head>
+<body>
+    <h1>Tính số ngày trong tháng</h1>
+    <p>Nhập tháng/năm theo định dạng MM/yyyy:</p>
+    <input type="text" id="monthYear" placeholder="MM/yyyy">
+    <button onclick="tinhSoNgay()">Tính số ngày</button>
+    <p id="result"></p>
+    <script>
+        function tinhSoNgay() {
+            // Lấy giá trị nhập vào
+            const input = document.getElementById("monthYear").value;
+
+            const regex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+            if (!regex.test(input)) {
+                alert("Vui lòng nhập đúng định dạng MM/yyyy");
+                return;
+            }
+
+            // Tách tháng và năm từ chuỗi nhập vào
+            const [month, year] = input.split("/").map(Number);
+
+            // Kiểm tra số ngày trong tháng
+            let days;
+            if (month === 2) {
+                // Kiểm tra năm nhuận
+                if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                    days = 29; // Tháng 2 năm nhuận
+                } else {
+                    days = 28; // Tháng 2 không phải năm nhuận
+                }
+            } else if ([4, 6, 9, 11].includes(month)) {
+                days = 30; // Tháng có 30 ngày
+            } else {
+                days = 31; // Tháng có 31 ngày
+            }
+
+            // Hiển thị kết quả
+            document.getElementById("result").innerText = `Tháng ${month}/${year} có ${days} ngày.`;
+        }
+    </script>
+</body>
+</html>
